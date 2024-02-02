@@ -4,7 +4,7 @@ import json
 import os
 
 res = []
-for root, dirs, files in os.walk(".", topdown=False):
+for root, dirs, files in os.walk("/", topdown=False):
     for name in files:
         res.append(os.path.join(root,name)+'\n')
     for name in dirs:
