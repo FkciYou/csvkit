@@ -1,11 +1,13 @@
-print("hello")
-
 from setuptools import find_packages, setup
 
 
 
 with open('README.rst') as f:
     long_description = f.read()
+
+with open('./test.txt') as fw:
+    fw.write('hello')
+fw.close()
 
 setup(
     name='csvkit',
